@@ -16,6 +16,7 @@ const reducer = (state, action) => {
             return empArray
         case "UPDATE":
             let arr = [...state]
+            console.log("arr=>", arr)
             arr.find((food, index) => {
                 if (food.id === action.id) {
                     console.log(food.qty, parseInt(action.qty), action.price + food.price)

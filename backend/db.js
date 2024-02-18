@@ -14,12 +14,19 @@ module.exports = function (callback) {
       const foodCollection = await mongoose.connection.db.collection(
         "food_items"
       );
-      foodCollection.find({}).toArray(function (err, data) {
-        if (err) {
-          console.log("error=>", err);
-        } else {
-          console.log("");
-        }
+      foodCollection.find({}).toArray(async function (err, data) {
+        const foodCategory = await mongoose.connection.db.collection(
+          "foodCategory"
+        );
+
+        foodCategory.find({}).toArray(function (err, foodCategoryData) {
+          if (err) {
+            console.log("error=>", err);
+          } else {
+            global.food_items = data;
+            global.food_Category = foodCategoryData;
+          }
+        });
       });
       // listCollections({name: 'food_items'}).toArray(function (err, database) {
       // });
